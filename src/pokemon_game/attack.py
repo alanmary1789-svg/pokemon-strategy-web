@@ -8,12 +8,4 @@ class Attack:
         self.damage = damage
         self.type = attack_type 
 
-    def attack(self, attacker, defender, attack):
-
-        damage = self.damage_strategy.calculate(
-        attack,
-        attacker,
-        defender,
-     )
-
-        defender.take_damage(damage)
+    

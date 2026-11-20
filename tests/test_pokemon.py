@@ -52,19 +52,6 @@ def test_pokemon_cannot_be_healed_above_max_hp():
     assert pikachu.hp == 100
 
 
-"""
-def test_pokemon_attack_uses_damage_strategy():
-    charmander = Pokemon("Charmander", 100, PokemonType.FIRE)
-    bulbasaur = Pokemon("Bulbasaur", 100, PokemonType.GRASS)
-
-    strategy = ContextDamageStrategy()
-    ember = Attack("Ember", 20, PokemonType.FIRE)
-
-    charmander.attack(bulbasaur, ember, strategy)
-
-    assert bulbasaur.hp == 60
-
-"""
 
 def test_pokemon_can_have_attacks():
     thunderbolt = Attack(

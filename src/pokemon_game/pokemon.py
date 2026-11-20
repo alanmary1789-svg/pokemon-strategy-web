@@ -26,8 +26,4 @@ class Pokemon:
         if self.hp > self.max_hp :
             self.hp = self.max_hp 
             
-    """
-    def attack(self, target, attack, damage_strategy : DamageStrategy):
-        damage = damage_strategy.calculate(attack, self, target)
-        target.take_damage(damage)
-    """
+    

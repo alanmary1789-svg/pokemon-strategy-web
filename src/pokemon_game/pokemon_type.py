@@ -30,3 +30,7 @@ TYPE_EFFECTIVENESS = {
         PokemonType.ELECTRIC: 0.5,
     },
 }
+
+def type_multiplier(attack_type: PokemonType, defender_type: PokemonType) -> float:
+    """Coefficient d'efficacité d'un type d'attaque contre le type du défenseur."""
+    return TYPE_EFFECTIVENESS.get(attack_type, {}).get(defender_type, 1.0)
