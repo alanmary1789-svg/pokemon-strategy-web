@@ -4,8 +4,32 @@ from pokemon_game.pokemon_type import PokemonType, type_multiplier
 from pokemon_game.roster import ROSTER, UnknownPokemon, create_pokemon
 
 
-def test_roster_contains_the_four_starters():
-    assert set(ROSTER) == {"pikachu", "salameche", "bulbizarre", "carapuce"}
+FAMILIES = [
+    ("bulbizarre", "herbizarre", "florizarre"),
+    ("salameche", "reptincel", "dracaufeu"),
+    ("carapuce", "carabaffe", "tortank"),
+    ("pikachu", "raichu"),
+]
+
+
+def test_roster_contains_every_family():
+    assert set(ROSTER) == {key for family in FAMILIES for key in family}
+
+
+def test_roster_is_in_pokedex_order():
+    numbers = [spec.dex for spec in ROSTER.values()]
+
+    assert numbers == sorted(set(numbers))
+
+
+@pytest.mark.parametrize("family", FAMILIES, ids=lambda family: family[0])
+def test_each_evolution_is_stronger_than_the_previous_stage(family):
+    for before, after in zip(family, family[1:]):
+        previous, evolution = ROSTER[before], ROSTER[after]
+
+        assert evolution.pokemon_type == previous.pokemon_type
+        assert evolution.max_hp > previous.max_hp
+        assert max(d for _, d, _ in evolution.attacks) > max(d for _, d, _ in previous.attacks)
 
 
 @pytest.mark.parametrize(
@@ -15,6 +39,10 @@ def test_roster_contains_the_four_starters():
         ("salameche", PokemonType.FIRE),
         ("bulbizarre", PokemonType.GRASS),
         ("carapuce", PokemonType.WATER),
+        ("raichu", PokemonType.ELECTRIC),
+        ("dracaufeu", PokemonType.FIRE),
+        ("florizarre", PokemonType.GRASS),
+        ("tortank", PokemonType.WATER),
     ],
 )
 def test_each_pokemon_has_its_type_and_full_hp(key, pokemon_type):

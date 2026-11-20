@@ -63,6 +63,7 @@ class AttackOut(BaseModel):
 
 class RosterEntry(BaseModel):
     key: str
+    dex: int
     name: str
     type: str
     max_hp: int
@@ -119,6 +120,7 @@ class BattleOut(BaseModel):
 def roster_entry(key: str, spec: PokemonSpec) -> RosterEntry:
     return RosterEntry(
         key=key,
+        dex=spec.dex,
         name=spec.name,
         type=spec.pokemon_type.value,
         max_hp=spec.max_hp,

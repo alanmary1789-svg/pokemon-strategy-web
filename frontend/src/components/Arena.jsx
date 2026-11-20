@@ -2,8 +2,8 @@ import { useState } from 'react'
 import { TYPE_LABELS } from '../labels.js'
 import HpBar from './HpBar.jsx'
 import TypeIcon from './TypeIcon.jsx'
-// Numéros du Pokédex national : PokeAPI range ses sprites par numéro.
-const DEX = { bulbizarre: 1, salameche: 4, carapuce: 7, pikachu: 25 }
+
+// Sprites animés Noir/Blanc : PokeAPI les range par numéro du Pokédex national.
 const SPRITES =
   'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated'
 
@@ -12,8 +12,8 @@ function Fighter({ side, pokemon, trainer, hp, hit }) {
   const type = pokemon?.type ?? 'unknown'
   const ko = pokemon && hp === 0
   // Comme en jeu : ton Pokémon vu de dos, l'adversaire vu de face.
-  const dex = DEX[pokemon?.key]
-  const src = dex ? `${SPRITES}${side === 'player' ? '/back' : ''}/${dex}.gif` : null  
+  const dex = pokemon?.dex
+  const src = dex ? `${SPRITES}${side === 'player' ? '/back' : ''}/${dex}.gif` : null
   const [failedSrc, setFailedSrc] = useState(null)
   const showImage = src !== null && failedSrc !== src                // image absente -> emblème du type
 

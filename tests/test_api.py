@@ -30,9 +30,16 @@ def test_options_list_the_roster_and_the_choices(client):
 
     assert response.status_code == 200
     data = response.json()
-    assert [p["key"] for p in data["pokemon"]] == ["pikachu", "salameche", "bulbizarre", "carapuce"]
-    assert data["pokemon"][0] == {
+    assert [p["key"] for p in data["pokemon"]] == [
+        "bulbizarre", "herbizarre", "florizarre",
+        "salameche", "reptincel", "dracaufeu",
+        "carapuce", "carabaffe", "tortank",
+        "pikachu", "raichu",
+    ]
+    pikachu = next(p for p in data["pokemon"] if p["key"] == "pikachu")
+    assert pikachu == {
         "key": "pikachu",
+        "dex": 25,
         "name": "Pikachu",
         "type": "electric",
         "max_hp": 95,

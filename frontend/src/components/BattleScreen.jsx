@@ -53,10 +53,10 @@ export default function BattleScreen({ initialBattle, options, onReplay, replayi
     }
   }
 
-    // L'état du combat donne le nom du Pokémon ; le roster donne sa clé (pour l'image).
-  const withKey = (pokemon) => ({ ...pokemon, key: options.pokemon.find((p) => p.name === pokemon.name)?.key })
-  const player = withKey(battle.player.pokemon)
-  const opponent = withKey(battle.opponent.pokemon)
+  // L'état du combat donne le nom du Pokémon ; le roster donne son numéro du Pokédex (pour l'image).
+  const withDex = (pokemon) => ({ ...pokemon, dex: options.pokemon.find((p) => p.name === pokemon.name)?.dex })
+  const player = withDex(battle.player.pokemon)
+  const opponent = withDex(battle.opponent.pokemon)
   const over = battle.status !== 'in_progress'
   const potions = battle.player.potions
   const fullHp = hp.player === player.max_hp

@@ -86,3 +86,8 @@ Codes d'erreur : `422` requête mal formée, `400` action interdite par les règ
 - Les combats en cours sont gardés en mémoire : ils sont perdus au redémarrage du serveur.
 - Pas de comptes : l'identifiant aléatoire d'un combat est la seule clé pour y jouer.
 - Les Pokémon sont représentés par l'emblème de leur type, pas par des illustrations officielles.
+
+
+## Crédits
+
+Les sprites des Pokémon sont © Nintendo / Creatures Inc. / GAME FREAK Inc. Ils sont chargés depuis [PokeAPI/sprites](https://github.com/PokeAPI/sprites) et ne sont pas distribués avec ce dépôt. Sans connexion internet, l'arène affiche l'emblème du type à la place.
