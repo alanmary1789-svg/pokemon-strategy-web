@@ -53,8 +53,10 @@ export default function BattleScreen({ initialBattle, options, onReplay, replayi
     }
   }
 
-  const player = battle.player.pokemon
-  const opponent = battle.opponent.pokemon
+    // L'état du combat donne le nom du Pokémon ; le roster donne sa clé (pour l'image).
+  const withKey = (pokemon) => ({ ...pokemon, key: options.pokemon.find((p) => p.name === pokemon.name)?.key })
+  const player = withKey(battle.player.pokemon)
+  const opponent = withKey(battle.opponent.pokemon)
   const over = battle.status !== 'in_progress'
   const potions = battle.player.potions
   const fullHp = hp.player === player.max_hp
@@ -75,8 +77,15 @@ export default function BattleScreen({ initialBattle, options, onReplay, replayi
         </button>
       </header>
 
-      <Arena weather={battle.weather} terrain={battle.terrain} player={player} opponent={opponent} hp={hp} hit={hit} />
-
+      <Arena
+        weather={battle.weather}
+        terrain={battle.terrain}
+        player={player}
+        opponent={opponent}
+        trainers={{ player: battle.player.name, opponent: battle.opponent.name }}
+        hp={hp}
+        hit={hit}
+      />
       <section className="console">
         <div className="dialog" ref={dialogRef} aria-live="polite">
           <p className="line">

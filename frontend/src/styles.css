@@ -809,3 +809,27 @@ legend,
   .token.is-hit { animation: none; outline: 4px solid var(--hp-low); }
   .token, .hp-fill, .primary, .move { transition: none; }
 }
+
+
+/* ---------- Nom du dresseur et images des Pokémon ---------- */
+.panel-trainer {
+  display: block;
+  margin-bottom: 2px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+/* Avec une image : plus de disque coloré, l'image se pose sur l'arène. */
+.token.has-image {
+  background: none;
+  border: 0;
+}
+
+.token-image {
+  width: 130%;
+  height: 130%;
+  object-fit: contain;
+  image-rendering: pixelated;
+  pointer-events: none;
+}

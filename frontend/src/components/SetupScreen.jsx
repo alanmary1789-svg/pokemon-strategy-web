@@ -137,8 +137,13 @@ export default function SetupScreen({ options, settings, onChange, onStart, star
         </div>
 
         <aside className="preview" aria-label="Aperçu de l'arène">
-          <Arena weather={settings.weather} terrain={settings.terrain} player={player} opponent={opponent} />
-          <dl className="effects">
+          <Arena
+            weather={settings.weather}
+            terrain={settings.terrain}
+            player={player}
+            opponent={opponent}
+            trainers={{ player: settings.trainer, opponent: 'Rival' }}
+          />          <dl className="effects">
             <div>
               <dt>{weather.label}</dt>
               <dd>{describeModifiers(weather.modifiers)}</dd>
