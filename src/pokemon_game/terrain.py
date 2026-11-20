@@ -15,3 +15,9 @@ TERRAIN_EFFECTIVENESS = {
         PokemonType.ELECTRIC: 1.5,
     },
 }
+
+TERRAIN_LABELS = {
+    Terrain.NORMAL: "Normal",
+    Terrain.GRASSY: "Herbeux",
+    Terrain.ELECTRIC: "Électrique",
+}

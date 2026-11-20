@@ -18,3 +18,9 @@ WEATHER_EFFECTIVENESS = {
     },
     Weather.CLEAR: {}
 }
+
+WEATHER_LABELS = {
+    Weather.CLEAR: "Ciel dégagé",
+    Weather.RAIN: "Pluie",
+    Weather.SUN: "Soleil",
+}

@@ -1,7 +1,7 @@
 from pokemon_game.battle import Battle
 from pokemon_game.computer_player import ComputerPlayer
-from pokemon_game.weather import Weather
-from pokemon_game.terrain import Terrain
+from pokemon_game.weather import WEATHER_LABELS
+from pokemon_game.terrain import TERRAIN_LABELS
 
 class Game:
     def __init__(self, player1, player2, battle):
@@ -141,22 +141,16 @@ class Game:
             f"{defender.pokemon.hp:g}/{defender.pokemon.max_hp:g} PV"
         )
 
+        def display_conditions(self):
+            print()
+            print(f"Météo : {WEATHER_LABELS[self.battle.weather]}")
+            print(f"Terrain : {TERRAIN_LABELS[self.battle.terrain]}")
+
+
     def display_conditions(self):
-        weather_labels = {
-            Weather.CLEAR: "Ciel dégagé",
-            Weather.RAIN: "Pluie",
-            Weather.SUN: "Soleil"
-        }
-
-        terrain_labels = {
-            Terrain.NORMAL: "Normal",
-            Terrain.GRASSY: "Herbeux",
-            Terrain.ELECTRIC: "Électrique"
-        }
-
         print()
-        print(f"Météo : {weather_labels[self.battle.weather]}")
-        print(f"Terrain : {terrain_labels[self.battle.terrain]}")
+        print(f"Météo : {WEATHER_LABELS[self.battle.weather]}")
+        print(f"Terrain : {TERRAIN_LABELS[self.battle.terrain]}")
 
     def display_turn(self, current_player, opponent):
         print()
