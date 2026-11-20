@@ -1,12 +1,12 @@
-from enum import Enum 
+from enum import Enum
+
 
 class PokemonType(Enum):
+    NORMAL = "normal"
     FIRE = "fire"
     WATER = "water"
     GRASS = "grass"
     ELECTRIC = "electric"
-
-
 
 
 TYPE_EFFECTIVENESS = {
@@ -30,6 +30,7 @@ TYPE_EFFECTIVENESS = {
         PokemonType.ELECTRIC: 0.5,
     },
 }
+
 
 def type_multiplier(attack_type: PokemonType, defender_type: PokemonType) -> float:
     """Coefficient d'efficacité d'un type d'attaque contre le type du défenseur."""
