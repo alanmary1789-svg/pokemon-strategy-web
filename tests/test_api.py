@@ -157,3 +157,12 @@ def test_each_battle_is_independent(client):
 
     assert first["id"] != second["id"]
     assert client.get(f"/api/battles/{second['id']}").json() == second
+
+def test_options_expose_weather_and_terrain_modifiers(client):
+    data = client.get("/api/options").json()
+
+    weathers = {w["key"]: w["modifiers"] for w in data["weathers"]}
+    terrains = {t["key"]: t["modifiers"] for t in data["terrains"]}
+    assert weathers["rain"] == {"fire": 0.5, "water": 1.5}
+    assert weathers["clear"] == {}
+    assert terrains["grassy"] == {"grass": 1.5}

@@ -50,6 +50,10 @@ class Option(BaseModel):
     key: str
     label: str
 
+class Condition(Option):
+    modifiers: dict[str, float]          # type d'attaque -> multiplicateur
+
+
 
 class AttackOut(BaseModel):
     name: str
@@ -68,8 +72,8 @@ class RosterEntry(BaseModel):
 class Options(BaseModel):
     pokemon: list[RosterEntry]
     difficulties: list[Option]
-    weathers: list[Option]
-    terrains: list[Option]
+    weathers: list[Condition]
+    terrains: list[Condition]
 
 
 class PokemonOut(BaseModel):

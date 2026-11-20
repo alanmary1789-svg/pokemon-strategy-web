@@ -8,13 +8,14 @@ from fastapi.staticfiles import StaticFiles
 from pokemon_game.difficulty_selector import DIFFICULTIES
 from pokemon_game.match import Match, MatchError, MatchOver, start_match
 from pokemon_game.roster import ROSTER
-from pokemon_game.terrain import TERRAIN_LABELS
-from pokemon_game.weather import WEATHER_LABELS
+from pokemon_game.terrain import TERRAIN_EFFECTIVENESS, TERRAIN_LABELS
+from pokemon_game.weather import WEATHER_EFFECTIVENESS, WEATHER_LABELS
 
 from .schemas import (
     AttackRequest,
     BattleCreate,
     BattleOut,
+    Condition,
     Option,
     Options,
     battle_out,
@@ -24,6 +25,10 @@ from .store import BattleStore
 
 # src/pokemon_api/app.py -> racine du projet -> frontend/dist (créé par « npm run build »)
 FRONTEND_DIST = Path(__file__).resolve().parents[2] / "frontend" / "dist"
+
+def modifiers_of(table: dict) -> dict[str, float]:
+    """{PokemonType.FIRE: 0.5} -> {"fire": 0.5} : des clés JSON lisibles par le front."""
+    return {pokemon_type.value: multiplier for pokemon_type, multiplier in table.items()}
 
 
 def create_app(static_dir: Path | None = FRONTEND_DIST) -> FastAPI:
@@ -54,8 +59,14 @@ def create_app(static_dir: Path | None = FRONTEND_DIST) -> FastAPI:
         return Options(
             pokemon=[roster_entry(key, spec) for key, spec in ROSTER.items()],
             difficulties=[Option(key=key, label=label) for key, (label, _) in DIFFICULTIES.items()],
-            weathers=[Option(key=w.value, label=label) for w, label in WEATHER_LABELS.items()],
-            terrains=[Option(key=t.value, label=label) for t, label in TERRAIN_LABELS.items()],
+            weathers=[
+                Condition(key=w.value, label=label, modifiers=modifiers_of(WEATHER_EFFECTIVENESS[w]))
+                for w, label in WEATHER_LABELS.items()
+            ],
+            terrains=[
+                Condition(key=t.value, label=label, modifiers=modifiers_of(TERRAIN_EFFECTIVENESS[t]))
+                for t, label in TERRAIN_LABELS.items()
+            ],
         )
 
     @app.post("/api/battles", response_model=BattleOut, status_code=201)
